@@ -87,6 +87,32 @@
   }
   .navbar.scrolled .nav-logo { color: var(--forest); }
 
+  .navbar:not(.scrolled) {
+    background: linear-gradient(to bottom, rgba(8,28,21,0.72) 0%, transparent 100%);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--sage-light); }
+  .navbar.scrolled .nav-links a { color: var(--forest); }
+  .navbar.scrolled .nav-links a:hover { color: var(--sage); }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
   .nav-cta {
     display: inline-flex;
     align-items: center;
@@ -604,30 +630,151 @@
     line-height: 1.75;
   }
 
-  /* ─── TIMELINE ─── */
+  /* ─── TESTIMONIALS ─── */
+  .testimonials {
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .testimonials-track-wrap {
+    margin-top: 56px;
+    position: relative;
+  }
+  .testimonials-track-wrap::before,
+  .testimonials-track-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .testimonials-track-wrap::before {
+    right: 0;
+    background: linear-gradient(to left, var(--cream), transparent);
+  }
+  .testimonials-track-wrap::after {
+    left: 0;
+    background: linear-gradient(to right, var(--cream), transparent);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+  .testi-card {
+    background: white;
+    border: 1px solid rgba(27,67,50,0.08);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.45s;
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+    filter: blur(4px);
+    transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out), filter 0.75s var(--ease-out), box-shadow 0.45s var(--ease-out);
+    transition-delay: var(--stagger, 0ms);
+  }
+  .testi-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  .testi-card.visible:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(82,183,136,0.35);
+  }
+  .testi-quote-icon {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--sage-mist);
+    font-family: Georgia, serif;
+    font-weight: 900;
+    user-select: none;
+    pointer-events: none;
+  }
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+  .testi-stars span {
+    color: #F4A015;
+    font-size: 1rem;
+  }
+  .testi-text {
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid rgba(27,67,50,0.07);
+    padding-top: 20px;
+  }
+  .testi-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage), var(--forest));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(27,67,50,0.2);
+  }
+  .testi-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--forest);
+  }
+  .testi-dog {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ─── TIMELINE (redesigned) ─── */
   .process {
     background: #fff;
   }
   .timeline {
-    margin-top: 56px;
-    max-width: 680px;
+    margin-top: 64px;
+    max-width: 800px;
     margin-right: auto;
     position: relative;
-    padding-right: 80px;
   }
   .timeline::before {
     content: '';
     position: absolute;
-    right: 28px;
-    top: 8px;
-    bottom: 8px;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--sage), var(--sage-mist));
-    border-radius: 3px;
+    right: 31px;
+    top: 32px;
+    bottom: 32px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--sage) 0%, var(--sage-light) 50%, var(--sage-mist) 100%);
+    border-radius: 2px;
   }
   .tl-item {
     position: relative;
-    margin-bottom: 48px;
+    margin-bottom: 0;
+    display: flex;
+    gap: 28px;
+    padding: 0 80px 0 0;
     opacity: 0;
     transform: translateX(40px);
     filter: blur(4px);
@@ -647,20 +794,50 @@
     from { transform: scale(0.6); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
-  .tl-num {
+  .tl-connector {
     position: absolute;
-    right: -80px;
+    right: 0;
     top: 0;
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .tl-num {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--sage-mist), #fff);
+    border: 2.5px solid var(--sage);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--sage);
+    color: var(--forest);
     line-height: 1;
+    box-shadow: 0 4px 20px rgba(82,183,136,0.22);
+    flex-shrink: 0;
+    z-index: 1;
+    position: relative;
+  }
+  .tl-body {
+    flex: 1;
+    padding-bottom: 52px;
+  }
+  .tl-item:last-child .tl-body { padding-bottom: 0; }
+  .tl-body-inner {
+    background: #f9fafb;
+    border: 1px solid rgba(27,67,50,0.07);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    transition: box-shadow 0.35s var(--ease-out), border-color 0.35s, transform 0.35s var(--ease-out);
+  }
+  .tl-item.visible .tl-body-inner:hover {
+    box-shadow: 0 12px 36px rgba(27,67,50,0.1);
+    border-color: rgba(82,183,136,0.3);
+    transform: translateY(-3px);
   }
   .tl-body h3 {
     font-size: 1.12rem;
@@ -671,12 +848,23 @@
     align-items: center;
     gap: 10px;
   }
-  .tl-body h3 svg { width: 22px; height: 22px; color: var(--sage); flex-shrink: 0; }
+  .tl-body h3 i, .tl-body h3 svg { width: 22px; height: 22px; color: var(--sage); flex-shrink: 0; }
   .tl-body p {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.8;
-    padding-right: 4px;
+  }
+  .tl-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+    background: var(--sage-mist);
+    color: var(--forest);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 50px;
   }
 
   /* ─── FAQ ─── */
@@ -1046,9 +1234,10 @@
     .why-grid { grid-template-columns: 1fr; }
     .why-card:nth-child(1),
     .why-card:nth-child(4) { grid-column: span 1; grid-row: span 1; }
-    .timeline { padding-right: 64px; }
-    .tl-num { right: -64px; width: 44px; height: 44px; font-size: 1.3rem; }
-    .timeline::before { right: 20px; }
+    .timeline::before { right: 23px; }
+    .tl-item { padding-right: 60px; gap: 16px; }
+    .tl-num { width: 48px; height: 48px; font-size: 1.1rem; }
+    .tl-connector { width: 48px; }
     .hero-scroll { bottom: 100px; }
     .float-wa-text { display: none; }
     .float-wa { padding: 16px; border-radius: 50%; }
@@ -1067,11 +1256,18 @@
 
 <nav class="navbar" id="navbar">
   <a href="#" class="nav-logo">אלון כץ | דוגסיטר</a>
+  <ul class="nav-links">
+    <li><a href="#about">עלי</a></li>
+    <li><a href="#services">שירותים</a></li>
+    <li><a href="#testimonials">המלצות</a></li>
+    <li><a href="#faq">שאלות</a></li>
+  </ul>
   <a href="https://wa.me/972584846272" class="nav-cta" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.547 4.098 1.508 5.836L0 24l6.335-1.652A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.652-.523-5.163-1.426l-.37-.22-3.762.982.997-3.666-.24-.378A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
     ווטסאפ
   </a>
 </nav>
+
 
 <section class="hero grain" id="home">
   <div class="hero-bg">
@@ -1214,6 +1410,68 @@
   <svg viewBox="0 0 1440 60" preserveAspectRatio="none" fill="#ffffff"><path d="M0,60 L1440,0 L1440,60 L0,60 Z"/></svg>
 </div>
 
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <span class="section-eyebrow reveal">מה אומרים עלינו</span>
+    <h2 class="section-title reveal reveal-d1">לקוחות<br>ממליצים</h2>
+    <p class="section-sub reveal reveal-d2">המילים של בעלי הכלבים שווות יותר מכל מה שאני יכול לספר.</p>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal reveal-d1" style="--stagger: 80ms">
+        <div class="testi-quote-icon" aria-hidden="true">"</div>
+        <div class="testi-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-text">אלון טיפל בבאדי שלנו שבוע שלם כשהיינו בחו"ל. קיבלנו תמונות וסרטונים כל יום – הכלב נראה מאושר ורגוע. חזרנו הביתה עם כלב שמח ואנחנו עם ראש שקט. ממליצה בחום!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:none;padding:0;overflow:hidden;">
+            <img src="michal.png" alt="מיכל ר." style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='מ';this.parentElement.style.background='linear-gradient(135deg,var(--sage),var(--forest))';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';">
+          </div>
+          <div>
+            <div class="testi-name">מיכל ר.</div>
+            <div class="testi-dog">🐕 באדי – לברדור 3 שנים</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d2" style="--stagger: 180ms">
+        <div class="testi-quote-icon" aria-hidden="true">"</div>
+        <div class="testi-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-text">הגולדן שלנו סופר חרדתי עם זרים, אבל מפגש ההיכרות עם אלון שינה הכל. הוא ידע בדיוק איך להתנהל איתו בסבלנות. בפעם הראשונה שיצאנו, לא דאגנו ולו לרגע אחד.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:none;padding:0;overflow:hidden;">
+            <img src="dan.png" alt="דן ושרה כ." style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='ד';this.parentElement.style.background='linear-gradient(135deg,var(--sage),var(--forest))';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';">
+          </div>
+          <div>
+            <div class="testi-name">דן ושרה כ.</div>
+            <div class="testi-dog">🐾 נאגי – גולדן רטריבר</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d3" style="--stagger: 280ms">
+        <div class="testi-quote-icon" aria-hidden="true">"</div>
+        <div class="testi-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-text">מזה שנה שאלון מטייל עם לונה שלנו בכל בוקר. הוא תמיד בזמן, אחראי ואוהב. לונה כבר מחכה לו ליד הדלת כל בוקר. שירות פנטסטי מתוך אהבה אמיתית לכלבים.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:none;padding:0;overflow:hidden;">
+            <img src="yael.png" alt="יעל ט." style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='י';this.parentElement.style.background='linear-gradient(135deg,var(--sage),var(--forest))';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';">
+          </div>
+          <div>
+            <div class="testi-name">יעל ט.</div>
+            <div class="testi-dog">🐩 לונה – שפיץ לגדול</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" fill="#ffffff"><path d="M0,0 L1440,0 L1440,60 Q720,20 0,60 Z"/></svg>
+</div>
+
 <section class="process" id="process">
   <div class="container">
     <span class="section-eyebrow reveal">איך זה עובד</span>
@@ -1221,31 +1479,51 @@
     <p class="section-sub reveal reveal-d2">תהליך פשוט ומסור, שמתחיל עוד לפני שנפרדים.</p>
     <div class="timeline" id="timeline">
       <div class="tl-item" style="--stagger: 0ms">
-        <div class="tl-num">1</div>
+        <div class="tl-connector">
+          <div class="tl-num">1</div>
+        </div>
         <div class="tl-body">
-          <h3><i data-lucide="handshake"></i> מפגש היכרות מוקדם</h3>
-          <p>מגיע אליכם (ללא תשלום) כדי להכיר אתכם ואת הכלב ולשמוע על ההרגלים שלו.</p>
+          <div class="tl-body-inner">
+            <h3><i data-lucide="handshake"></i> מפגש היכרות מוקדם</h3>
+            <p>מגיע אליכם (ללא תשלום) כדי להכיר אתכם ואת הכלב ולשמוע על ההרגלים שלו.</p>
+            <span class="tl-tag">🏠 בבית שלכם · חינם</span>
+          </div>
         </div>
       </div>
       <div class="tl-item" style="--stagger: 120ms">
-        <div class="tl-num">2</div>
+        <div class="tl-connector">
+          <div class="tl-num">2</div>
+        </div>
         <div class="tl-body">
-          <h3><i data-lucide="trees"></i> טיולים מותאמים</h3>
-          <p>יוצאים לטבע היפה של המושב, שומרים על בטיחות מלאה ומקפידים על שתיית מים.</p>
+          <div class="tl-body-inner">
+            <h3><i data-lucide="trees"></i> טיולים מותאמים</h3>
+            <p>יוצאים לטבע היפה של המושב, שומרים על בטיחות מלאה ומקפידים על שתיית מים.</p>
+            <span class="tl-tag">🌿 הטבע של המושב</span>
+          </div>
         </div>
       </div>
       <div class="tl-item" style="--stagger: 240ms">
-        <div class="tl-num">3</div>
+        <div class="tl-connector">
+          <div class="tl-num">3</div>
+        </div>
         <div class="tl-body">
-          <h3><i data-lucide="gamepad-2"></i> זמן משחק וחיבוקים</h3>
-          <p>משחקי הבאה, משחקי חשיבה, או סתם התכרבלות מפנקת.</p>
+          <div class="tl-body-inner">
+            <h3><i data-lucide="gamepad-2"></i> זמן משחק וחיבוקים</h3>
+            <p>משחקי הבאה, משחקי חשיבה, או סתם התכרבלות מפנקת.</p>
+            <span class="tl-tag">🎾 כל יום ובכל מצב רוח</span>
+          </div>
         </div>
       </div>
       <div class="tl-item" style="--stagger: 360ms">
-        <div class="tl-num">4</div>
+        <div class="tl-connector">
+          <div class="tl-num">4</div>
+        </div>
         <div class="tl-body">
-          <h3><i data-lucide="clipboard-check"></i> טיפול מסור</h3>
-          <p>האכלה מדויקת, מים טריים, ומתן תרופות במידת הצורך.</p>
+          <div class="tl-body-inner">
+            <h3><i data-lucide="clipboard-check"></i> טיפול מסור</h3>
+            <p>האכלה מדויקת, מים טריים, ומתן תרופות במידת הצורך.</p>
+            <span class="tl-tag">💊 כולל תרופות ופריקת אנרגיה</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1404,7 +1682,7 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 
-  document.querySelectorAll('.reveal, .form-shell, .contact-info, .gets-grid, .about-stats').forEach(el => revealObs.observe(el));
+  document.querySelectorAll('.reveal, .form-shell, .contact-info, .gets-grid, .about-stats, .testi-card').forEach(el => revealObs.observe(el));
   const timeline = document.getElementById('timeline');
   if (timeline) revealObs.observe(timeline);
 
